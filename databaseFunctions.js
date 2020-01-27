@@ -1,4 +1,4 @@
-//setup modules, database and express
+//setup database
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('database.json');
@@ -21,9 +21,10 @@ const getAllProducts = async () => {
     return await database.get('products');
 }
 
-const addProductToCart = async (productKey) => {
+const addProductToCart = async (productKey, quantity) => {
     return await database.get('cart')
-                .push({ productKey: productKey })
+                .push({ productKey: productKey,
+                        quantity: quantity })
                 .write();
 }
 
