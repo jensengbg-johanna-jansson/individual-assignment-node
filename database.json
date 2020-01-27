@@ -38,6 +38,9 @@
   ],
   "cart": [
     {
+      "productKey": "2"
+    },
+    {
       "productKey": "3"
     }
   ]

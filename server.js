@@ -1,41 +1,22 @@
-//setup modules, database and express
+//setup sever
 const express = require('express');
-const lowdb = require('lowdb');
-const FileSync = require('lowdb/adapters/FileSync');
-const adapter = new FileSync('database.json');
-const database = lowdb(adapter);
 const app = express();
 const port = process.env.PORT || 8000;
+const db = require('./databaseFunctions');
 
-//app.use(express.static('public'));
-app.get('/', (req, res) => res.send('Hello World!'))
-
-//create new database
-const initiateDatabase = () => {
-    const productDatabaseInitiated = database.has('products').value();
-    const cartDatabaseInitiated = database.has('cart').value();
-
-    if(!productDatabaseInitiated) {
-        database.defaults({ products: [] }).write();
-    }
-    if(!cartDatabaseInitiated) {
-        database.defaults({ cart: [] }).write();
-    }
-}
+app.use(express.static('public'));
 
 //get all products
 app.get('/api/products', async (request, response) => {
-    console.log(request.url);
-
-    const res = await database.get('products');
+    const res = await db.getAllProducts();
     response.send(res);
 });
 
 //add product to cart
 app.post('/api/cart', async (request, response) => {
-    console.log(request.url);
     const productKey = request.query.productKey;
-    const checkProduct = await productChecker(productKey);
+    const checkProduct = await db.productChecker(productKey);  // check if products exist or is already in cart
+    
     let message = {
         success: false,
         message: '',
@@ -43,9 +24,7 @@ app.post('/api/cart', async (request, response) => {
     }
 
     if(checkProduct.productInCart == false) {
-        const addToCart = await database.get('cart')
-                                        .push({ productKey: productKey })
-                                        .write();
+        const addToCart = await db.addProductToCart(productKey);
         if(addToCart) {
             message.success = true;
             message.message = 'Product was added to cart'
@@ -68,7 +47,7 @@ app.post('/api/cart', async (request, response) => {
 app.delete('/api/cart', async (request, response) => {
     console.log(request.url);
     const productKey = request.query.productKey;
-    const checkProduct = await productChecker(productKey);
+    const checkProduct = await db.productChecker(productKey);  // check if products exist or is in cart
     let message = {
         success: false,
         message: '',
@@ -76,10 +55,7 @@ app.delete('/api/cart', async (request, response) => {
     }
 
     if(checkProduct.productInCart == true) {
-        const removeFromCart = await database.get('cart')
-                                            .remove({ productKey: productKey })
-                                            .write();
-        console.log(removeFromCart);
+        const removeFromCart = await db.removeProductFromCart(productKey);
         if(removeFromCart != '') {
             message.success = true;
             message.message = 'Product was removed from cart'
@@ -91,8 +67,7 @@ app.delete('/api/cart', async (request, response) => {
             message.message = 'No such product in cart'
         } else {
             message.message = 'Could not find product'
-        }
-        
+        }       
     }
 
     response.send(message);
@@ -100,73 +75,17 @@ app.delete('/api/cart', async (request, response) => {
 
 //get cart
 app.get('/api/cart', async (request, response) => {
-    console.log(request.url);
-
-    const res = await getProducts();
+    const res = await db.getProducts();
     response.send(res);
 });
 
-
-//checking if the specified product exist in the database and if it has been added to the cart
-const productChecker = async (productKey) => {
-    const productExist = await database.get('products').find({ productKey: productKey }).value();
-    let message = {
-        productExist: null,
-        productInCart: null
-    };
-
-    if(productExist !== undefined) {
-        message.productExist = true;
-
-        const productInCart = await database.get('cart').find({ productKey: productKey }).value();
-
-        if(productInCart !== undefined) {
-            message.productInCart = true;
-        } else {
-            message.productInCart = false;
-        }
-
-    } else {
-        message.productExist = false;
-    }
-    console.log(message);
-    return message;
-}
-
-//gets the product objects from the products database, based on which products are in the cart
-const getProducts = async () => {
-    const hasProducts = await database.get('cart').map('productKey').value();
-    let message = {
-        success: true,
-        emptyCart: '',
-        products: ''
-    };
-
-    if(hasProducts != '') {
-        const productKeyArray = await database.get('cart').map('productKey').value();
-        let productList = [];
-
-        for(i = 0; i < productKeyArray.length; i++){
-            let product = await database.get('products')
-                        .find({ productKey: productKeyArray[i] })
-                        .value();
-            productList.push(product);
-        }
-
-        message.emptyCart = false;
-        message.products = productList;
-    } else if(hasProducts == '') {
-        message.emptyCart = true;
-    } else {
-        message.success = false;
-    }
-
-    return message;
-}
-
+app.delete('/api/delcart', async (request, response) => {
+    const res = await db.deleteCart();
+    response.send(res);
+});
 
 //start server
 app.listen(port, () => {
     console.log('Starting new server at port: ', port);
-    initiateDatabase();
-})
+    db.initiateDatabase();
+});
