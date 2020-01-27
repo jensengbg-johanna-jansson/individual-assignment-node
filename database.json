@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "productKey": "1",
+      "productName": "sakura matcha cup",
+      "productBrand": "JC",
+      "productPrice": "79,00",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "2",
+      "productName": "rizen plate",
+      "productBrand": "HandmadeJapan",
+      "productPrice": "159,00",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "3",
+      "productName": "rizen rice bowl",
+      "productBrand": "HandmadeJapan",
+      "productPrice": "129,00",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "4",
+      "productName": "tsukimi large bowl",
+      "productBrand": "Premium Ceramics Japan",
+      "productPrice": "209,00",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "5",
+      "productName": "yuzu small dish",
+      "productBrand": "Nippon Togei",
+      "productPrice": "39,00",
+      "productImg": "https://placeimg.com/640/480/any"
+    }
+  ],
+  "cart": [
+    {
+      "productKey": "3"
+    }
+  ]
+}
