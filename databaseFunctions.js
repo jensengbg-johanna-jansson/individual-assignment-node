@@ -21,7 +21,7 @@ const getAllProducts = async () => {
     return await database.get('products');
 }
 
-const addProductToCart = async (productKey, quantity) => {
+const addProductToCart = async (productKey, quantity = 1) => {
     return await database.get('cart')
                 .push({ productKey: productKey,
                         quantity: quantity })

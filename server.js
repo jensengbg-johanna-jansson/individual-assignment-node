@@ -15,7 +15,6 @@ app.get('/api/products', async (request, response) => {
 //add product to cart
 app.post('/api/cart', async (request, response) => {
     const productKey = request.query.productKey;
-    const quantity = request.query.quantity;
     const checkProduct = await db.productChecker(productKey);  // check if products exist or is already in cart
     
     let message = {
@@ -25,18 +24,18 @@ app.post('/api/cart', async (request, response) => {
     }
 
     if(checkProduct.productInCart == false) {
-        const addToCart = await db.addProductToCart(productKey, quantity);
+        const addToCart = await db.addProductToCart(productKey);
         if(addToCart) {
             message.success = true;
-            message.message = 'Product was added to cart'
+            message.message = 'Product was added to cart';
         } else {
-            message.message = 'The product could not be added to cart'
+            message.message = 'The product could not be added to cart';
         }
     } else {
         if(checkProduct.productInCart == true) {
-            message.message = 'Product already in cart'
+            message.message = 'Product already in cart';
         } else {
-            message.message = 'Could not find product'
+            message.message = 'Could not find product';
         }
         
     }
@@ -46,7 +45,6 @@ app.post('/api/cart', async (request, response) => {
 
 //remove product from cart
 app.delete('/api/cart', async (request, response) => {
-    console.log(request.url);
     const productKey = request.query.productKey;
     const checkProduct = await db.productChecker(productKey);  // check if products exist or is in cart
     let message = {
@@ -59,15 +57,15 @@ app.delete('/api/cart', async (request, response) => {
         const removeFromCart = await db.removeProductFromCart(productKey);
         if(removeFromCart != '') {
             message.success = true;
-            message.message = 'Product was removed from cart'
+            message.message = 'Product was removed from cart';
         } else {
-            message.message = 'The product could not be removed from cart'
+            message.message = 'The product could not be removed from cart';
         }
     } else {
         if(checkProduct.productInCart == false) {
-            message.message = 'No such product in cart'
+            message.message = 'No such product in cart';
         } else {
-            message.message = 'Could not find product'
+            message.message = 'Could not find product';
         }       
     }
 

@@ -37,9 +37,5 @@
     }
   ],
   "cart": [
-    {
-      "productKey": "3",
-      "quantity": "1"
-    }
   ]
 }
