@@ -5,6 +5,7 @@
       "productName": "sakura matcha cup",
       "productBrand": "JC",
       "productPrice": "79,00",
+      "added": "2020-01-10",
       "productImg": "https://placeimg.com/640/480/any"
     },
     {
@@ -12,6 +13,7 @@
       "productName": "rizen plate",
       "productBrand": "HandmadeJapan",
       "productPrice": "159,00",
+      "added": "2020-01-10",
       "productImg": "https://placeimg.com/640/480/any"
     },
     {
@@ -19,6 +21,7 @@
       "productName": "rizen rice bowl",
       "productBrand": "HandmadeJapan",
       "productPrice": "129,00",
+      "added": "2019-11-24",
       "productImg": "https://placeimg.com/640/480/any"
     },
     {
@@ -26,13 +29,63 @@
       "productName": "tsukimi large bowl",
       "productBrand": "Premium Ceramics Japan",
       "productPrice": "209,00",
+      "added": "2020-01-17",
       "productImg": "https://placeimg.com/640/480/any"
     },
     {
       "productKey": "5",
+      "productName": "midori soy dish",
+      "productBrand": "CeramicsJapan",
+      "productPrice": "59,00",
+      "added": "2020-09-17",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "6",
+      "productName": "midori tea cup",
+      "productBrand": "CeramicsJapan",
+      "productPrice": "89,00",
+      "added": "2020-09-17",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "7",
+      "productName": "kawara rice bowl",
+      "productBrand": "HandmadeJapan",
+      "productPrice": "129,00",
+      "added": "2020-11-24",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "8",
+      "productName": "andon matcha cup",
+      "productBrand": "Premium Ceramics Japan",
+      "productPrice": "129,00",
+      "added": "2020-11-17",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "9",
+      "productName": "hana large bowl",
+      "productBrand": "Sun Ceramics",
+      "productPrice": "189,00",
+      "added": "2020-09-12",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "10",
+      "productName": "tsukimi small bowl",
+      "productBrand": "Premium Ceramics Japan",
+      "productPrice": "139,00",
+      "added": "2020-01-17",
+      "productImg": "https://placeimg.com/640/480/any"
+    },
+    {
+      "productKey": "11",
       "productName": "yuzu small dish",
       "productBrand": "Nippon Togei",
       "productPrice": "39,00",
+      "added": "2019-11-03",
       "productImg": "https://placeimg.com/640/480/any"
     }
   ],
